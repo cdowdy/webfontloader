@@ -1,0 +1,89 @@
+{% if is_async %}
+<script>
+WebFontConfig = {
+{{ font_service }}: {
+    {% if font_service == 'google' %}
+    families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}]
+    {% endif %}
+    {% if font_service == 'fontdeck' %}
+    id: '{{ font_deck_id }}'
+    {% endif %}
+    {% if font_service == 'fonts.com' %}
+    {% if version %}
+    projectId: '{{ projectID }}',
+    version: {{ version }}
+    {% else %}
+    projectId: '{{ projectID }}'
+    {% endif %}
+    {% endif %}
+    {% if font_service == 'custom' %}
+        {% if custom_url %}
+        families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}],
+                urls: ['{{ paths.theme }}{{ custom_url }}']
+        {% else %}
+        families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}]
+        {% endif %}
+    {% endif %}
+    }
+};
+(function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = '{{ async_loader }}';
+    s.parentNode.insertBefore(wf, s);
+})(document);
+</script>
+{% else %}
+
+
+{% if font_service == 'google' %}
+<script>
+    WebFont.load({
+    {{ font_service }}: {
+            families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}]
+        }
+    });
+</script>
+{% endif %}
+
+{% if font_service == 'custom' %}
+<script>
+  WebFont.load({
+    {{ font_service }}: {
+      {% if custom_url %}
+      families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}],
+      urls: ['{{ custom_url }}']
+      {% else %}
+      families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}]
+      {% endif %}
+    }
+  });
+</script>
+{% endif %}
+
+{# Script for Fontdeck Fonts #}
+{% if font_service == 'fontdeck' %}
+<script>
+    WebFont.load({
+    {{ font_service }}: {
+        id: '{{ font_deck_id }}'
+    }
+    });
+</script>
+{% endif %}
+
+{# script for Fonts.com fonts #}
+{% if font_service == 'fonts.com' %}
+<script>
+    WebFont.load({
+        monotype: {
+            {% if version %}
+            projectId: '{{ projectID }}',
+            version: {{ version }}
+            {% else %}
+            projectId: '{{ projectID }}'
+            {% endif %}
+        }
+    });
+</script>
+{% endif %}
+{% endif %}
