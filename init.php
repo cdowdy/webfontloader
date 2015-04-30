@@ -1,5 +1,5 @@
 <?php
 
-namespace Bolt\Extension\cdowdy\webfontloader;
+namespace Bolt\Extension\cdowdy\WebFontLoader;
 
 $app['extensions']->register(new Extension($app));

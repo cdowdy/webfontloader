@@ -1,7 +1,8 @@
 {
-    "name": "cdowdy/webfontloader",
+    "name": "cdowdy/WebFontLoader",
     "description": "A Bolt Extension To Use TypeKit's WebFont Loader in Your Templates.",
     "type": "bolt-extension",
+    "keywords": ["font loader", "Google Fonts", "TypeKit Font Loader"],
     "require": {
         "bolt/bolt": ">=2.0.0,<3.0.0"
     },
@@ -17,7 +18,7 @@
             "init.php"
         ],
         "psr-4": {
-            "Bolt\\Extension\\cdowdy\\webfontloader\\": ""
+            "Bolt\\Extension\\cdowdy\\WebFontLoader\\": ""
         }
     },
     

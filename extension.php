@@ -1,6 +1,6 @@
 <?php
 
-namespace Bolt\Extension\cdowdy\webfontloader;
+namespace Bolt\Extension\cdowdy\WebFontLoader;
 
 use Bolt\Application;
 use Bolt\BaseExtension;
@@ -11,7 +11,7 @@ class Extension extends BaseExtension
 
     public function getName()
     {
-        return "webfontloader";
+        return "WebFontLoader";
     }
 
 
