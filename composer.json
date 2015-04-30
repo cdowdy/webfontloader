@@ -13,6 +13,8 @@
             "email": "cory@corydowdy.com"
         }
     ],
+    "minimum-stability" : "dev",
+	"prefer-stable" : true,
     "autoload": {
         "files": [
             "init.php"
