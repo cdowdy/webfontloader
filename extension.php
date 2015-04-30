@@ -9,7 +9,6 @@ use Bolt\BaseExtension;
 class Extension extends BaseExtension
 {
 
-
     public function getName()
     {
         return "webfontloader";
@@ -24,8 +23,16 @@ class Extension extends BaseExtension
         }
     }
 
-    public function twigWebfont( $font_service = '', $font_family = array() )
+    public function twigWebfont( $fontService = '', $font_family = array() )
     {
+
+        $is_async     = '';
+        $asyncLoader  = '';
+        $custom_url   = '';
+        $font_deck_id = '';
+        $project_id   = '';
+        $version      = '';
+
         // load up twig template directory
         $this->app['twig.loader.filesystem']->addPath( __DIR__ . "/assets" );
 
@@ -50,6 +57,22 @@ class Extension extends BaseExtension
         } else {
             return new \Twig_Markup( '<b>No Font Service specified.</b>', 'UTF-8' );
         }
+        /**
+         * for the future... pass in font service and font families in the twig tag in the template
+         */
+       /*
+       if (empty($fontService)  && empty($this->config['font_service']) ) {
+
+            return new \Twig_Markup( '<b>No Font Service specified.</b>', 'UTF-8' );
+
+        } elseif (isset( $this->config['font_service'] )) {
+
+            $font_service = strtolower( $this->config['font_service'] );
+
+        } else {
+            $font_service = strtolower($fontService);
+        }
+       */
 
         // custom url's for custom fonts:
         if (isset( $this->config['custom_url'] )) {
@@ -96,19 +119,32 @@ class Extension extends BaseExtension
      */
     public function webfontScript()
     {
-        /**
-         * since there is no head function or any reliable way to insert anything in to the head in Bolt we have to
-         * hackishly insert our js into the head this way.
-         *
-         */
+        $currentVersion = '1.5.18';
+        $currentCDN     = '1.5.10';
 
-        $webfontJS = $this->getBaseUrl() . 'assets/js/webfontloader.js';
+
+        // non cdn webfont script
+        $webfontJS = $this->getBaseUrl() . 'assets/js/' . $currentVersion . '/webfontloader.js';
         $webfont   = <<<WEBFONT
 <script src="{$webfontJS}"></script>
 WEBFONT;
-        // insert snippet after the last CSS file in the head
-        $this->addSnippet( 'aftercss', $webfont );
+
+        // cdn webfont script
+        $cdnLoader = 'https://ajax.googleapis.com/ajax/libs/webfont/' . $currentCDN . '/webfont.js';
+        $cdnWebFont   = <<<WEBFONT
+<script src="{$cdnLoader}"></script>
+WEBFONT;
+
+        if ( ! empty ( $this->config['use_cdn'] )){
+            // insert snippet after the last CSS file in the head
+            $this->addSnippet( 'aftercss', $cdnWebFont );
+        } else {
+            // insert snippet after the last CSS file in the head
+            $this->addSnippet( 'aftercss', $webfont );
+        }
+
     }
+
 
     protected function getDefaultConfig()
     {
