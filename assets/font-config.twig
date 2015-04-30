@@ -26,11 +26,7 @@ WebFontConfig = {
     {% endif %}
     }
 };
-(function(d) {
-    var wf = d.createElement('script'), s = d.scripts[0];
-    wf.src = '{{ async_loader }}';
-    s.parentNode.insertBefore(wf, s);
-})(document);
+(function(d) {var wf = d.createElement('script'), s = d.scripts[0];wf.src = '{{ async_loader }}';s.parentNode.insertBefore(wf, s);})(document);
 </script>
 {% else %}
 
