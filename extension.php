@@ -9,6 +9,9 @@ use Bolt\BaseExtension;
 class Extension extends BaseExtension
 {
 
+    public $current_cdn = '1.5.18';
+    public $currentVersion = '1.6.6';
+
     public function getName()
     {
         return "webfontloader";
@@ -36,17 +39,23 @@ class Extension extends BaseExtension
         // load up twig template directory
         $this->app['twig.loader.filesystem']->addPath( __DIR__ . "/assets" );
 
-        // Determine if the script should be loaded async. If not declared in the config assume it's a regular blocking
-        // script
+       /*
+       Determine if the script should be loaded async.
+       If not declared in the config assume it's a regular render blocking script
+       */
+
+        // if async is not an empty value ( true and not false or nothing entered )
         if ( ! empty ( $this->config['async'] )) {
             $is_async = $this->config['async'];
 
+            // if use_cdn is not empty ( true and not false or nothing entered )
             if ( ! empty ( $this->config['use_cdn'] )) {
-                $asyncLoader = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js';
-            } else {
-                $asyncLoader = $this->getBaseUrl() . 'assets/js/webfontloader.js';
+                $asyncLoader = 'https://ajax.googleapis.com/ajax/libs/webfont/' . $this->current_cdn . '/webfont.js';
+
+            } else { // if false or nothing is entered use the current webfont loader version
+                $asyncLoader = $this->getBaseUrl() . 'assets/js/' . $this->currentVersion . '/webfontloader.js';
             }
-        } else {
+        } else { // all else fails fall back to regular webfont loader script insertion
             $this->webfontScript();
         }
 
@@ -115,32 +124,28 @@ class Extension extends BaseExtension
     }
 
     /**
-     *
+     * This may need some tinkering.
      */
     public function webfontScript()
     {
-        $currentVersion = '1.5.18';
-        $currentCDN     = '1.5.10';
-
-
         // non cdn webfont script
-        $webfontJS = $this->getBaseUrl() . 'assets/js/' . $currentVersion . '/webfontloader.js';
+        $webfontJS = $this->getBaseUrl() . 'assets/js/' . $this->currentVersion . '/webfontloader.js';
         $webfont   = <<<WEBFONT
 <script src="{$webfontJS}"></script>
 WEBFONT;
 
         // cdn webfont script
-        $cdnLoader = 'https://ajax.googleapis.com/ajax/libs/webfont/' . $currentCDN . '/webfont.js';
+        $cdnLoader = 'https://ajax.googleapis.com/ajax/libs/webfont/' . $this->current_cdn . '/webfont.js';
         $cdnWebFont   = <<<WEBFONT
 <script src="{$cdnLoader}"></script>
 WEBFONT;
 
         if ( ! empty ( $this->config['use_cdn'] )){
             // insert snippet after the last CSS file in the head
-            $this->addSnippet( 'aftercss', $cdnWebFont );
+            $this->addSnippet( 'afterheadcss', $cdnWebFont );
         } else {
             // insert snippet after the last CSS file in the head
-            $this->addSnippet( 'aftercss', $webfont );
+            $this->addSnippet( 'afterheadcss', $webfont );
         }
 
     }
