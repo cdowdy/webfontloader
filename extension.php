@@ -10,7 +10,7 @@ class Extension extends BaseExtension
 {
 
     public $current_cdn = '1.5.18';
-    public $currentVersion = '1.6.6';
+    public $currentVersion = '1.6.10';
 
     public function getName()
     {
