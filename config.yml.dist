@@ -1,5 +1,56 @@
 # ================================================================================= #
 #
-#                                     Bolt Picture Element Configuration
+#                                     Webfont Loader Configuration
 #
 # ================================================================================= #
+
+# --------------------------------------------------------------------------------- #
+# Load the TypeKit Webfont Loader script async:
+# for simplicity and to help users who don understand FOUT it defaults to false
+# if you would like to enable async loading uncomment (remove the # before async:) or change it to true
+# and save the configuration
+# --------------------------------------------------------------------------------- #
+async: true
+
+# use the google hosted (cdn) typekit webfont loader script. This may be a few versions behind the most current one
+# commented out by default
+use_cdn: true
+
+# --------------------------------------------------------------------------------- #
+# The Font Service you would like to use.
+# Options are:
+#   - Google
+#   - FontDeck
+#   - Fonts.com
+#   - custom ( your own fonts )
+# example:
+# font_sevice: Google
+# --------------------------------------------------------------------------------- #
+font_service: google
+
+# --------------------------------------------------------------------------------- #
+# The font families you would like to use.
+# example single font family:
+# font_family: [Droid Sans]
+# multiple fonts - separate each font with a comma:
+# font_family: [Muli, Playfair Display]
+# --------------------------------------------------------------------------------- #
+font_family: [ Montserrat, Lato ]
+
+# if using a custom font_service ( your own fonts ) and are loading a separate stylesheet for the fonts put the
+# URL here. This file must be located in your current themes directory
+# example:
+# custom_url: css/custom-fonts.css
+# --------------------------------------------------------------------------------- #
+#custom_url: css/custom-fonts.css
+
+# --------------------------------------------------------------------------------- #
+# Fontdeck ID:
+# --------------------------------------------------------------------------------- #
+#font_deck_id: asdfasdfasdfasdf
+
+# --------------------------------------------------------------------------------- #
+# Fonts.com
+# --------------------------------------------------------------------------------- #
+#projectID:
+#version
