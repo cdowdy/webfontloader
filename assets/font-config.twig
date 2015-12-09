@@ -3,7 +3,7 @@
 WebFontConfig = {
 {{ font_service }}: {
     {% if font_service == 'google' %}
-    families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}]
+    families: [{% for font_family in font_families %}'{{ font_family }}'{% if not loop.last  %},{% endif %}{% else %}{{ font_family }}{% endfor %}]
     {% endif %}
     {% if font_service == 'fontdeck' %}
     id: '{{ font_deck_id }}'
@@ -18,10 +18,10 @@ WebFontConfig = {
     {% endif %}
     {% if font_service == 'custom' %}
         {% if custom_url %}
-        families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}],
+        families: [{% for font_family in font_families %}'{{ font_family }}'{% if not loop.last  %},{% endif %}{% else %}{{ font_family }}{% endfor %}],
                 urls: ['{{ paths.theme }}{{ custom_url }}']
         {% else %}
-        families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}]
+        families: [{% for font_family in font_families %}'{{ font_family }}'{% if not loop.last  %},{% endif %}{% else %}{{ font_family }}{% endfor %}]
         {% endif %}
     {% endif %}
     }
@@ -35,7 +35,7 @@ WebFontConfig = {
 <script>
     WebFont.load({
     {{ font_service }}: {
-            families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}]
+            families: [{% for font_family in font_families %}'{{ font_family }}'{% if not loop.last  %},{% endif %}{% else %}{{ font_family }}{% endfor %}]
         }
     });
 </script>
@@ -46,10 +46,10 @@ WebFontConfig = {
   WebFont.load({
     {{ font_service }}: {
       {% if custom_url %}
-      families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}],
+      families: [{% for font_family in font_families %}'{{ font_family }}'{% if not loop.last  %},{% endif %}{% else %}{{ font_family }}{% endfor %}],
       urls: ['{{ custom_url }}']
       {% else %}
-      families: [{% for font_family in font_families %}'{{ font_family }}',{% else %}{{ font_family }}{% endfor %}]
+      families: [{% for font_family in font_families %}'{{ font_family }}'{% if not loop.last  %},{% endif %}{% else %}{{ font_family }}{% endfor %}]
       {% endif %}
     }
   });
