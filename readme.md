@@ -21,11 +21,24 @@ You can then move on to setting the rest of your available options in the config
 async: false  
 ```  
 
-**use_cdn**: Use The Google CDN for the TypeKit script. This may be a few versions behind the most current one available.  
+**use_cdn**: Use a CDN to deliver the TypeKit script. CDN options are below.  
 
 ```yaml
 use_cdn: false  
 ```  
+
+**cdn**  Three CDN's are available to use:  
+Certain areas of the World may block the Google CDN version. You now have the option of using two additional CDN's which are as follows:  
+ 
+  * Use The Google CDN for the TypeKit script. This may be a few versions behind the most current one available.  
+  * Use The JSDelivr CDN version
+  * Use The CDNJS CDN version  
+  
+```yaml  
+cdn: Google  
+```  
+
+
 **font_service**: The Font Service you would like to use. Options are:
    - Google
    - FontDeck
