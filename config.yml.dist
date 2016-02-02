@@ -16,6 +16,16 @@ async: true
 # commented out by default
 use_cdn: true
 
+# Typekit Webfont Loader now offers Two (2) additional CDN's to retrieve the webfont loader script from.
+# - JSDeliver http://www.jsdelivr.com/projects/webfontloader
+# - CDNJS https://cdnjs.com/libraries/webfont
+# Certain areas of the world may block the Google CDN Version (mainly China)
+# The Default CDN will be Google. You may Change this below.
+cdn: Google
+# additional examples:
+#cdn: jsdeliver
+#cdn: cdnjs
+
 # --------------------------------------------------------------------------------- #
 # The Font Service you would like to use.
 # Options are:
