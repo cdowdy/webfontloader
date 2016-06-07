@@ -23,7 +23,7 @@ use_cdn: true
 # The Default CDN will be Google. You may Change this below.
 cdn: Google
 # additional examples:
-#cdn: jsdeliver
+#cdn: jsdelivr
 #cdn: cdnjs
 
 # --------------------------------------------------------------------------------- #
