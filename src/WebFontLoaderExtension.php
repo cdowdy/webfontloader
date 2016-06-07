@@ -10,7 +10,7 @@ use Bolt\Controller\Zone;
 use Bolt\Extension\SimpleExtension;
 
 /**
- * BoltResponsiveImages extension class.
+ * WebFont Loader extension class.
  *
  * @author Cory Dowdy <cory@corydowdy.com>
  */
@@ -53,8 +53,6 @@ class WebFontLoaderExtension extends SimpleExtension
     {
 
 
-        $this->addAssets();
-
         $is_async = '';
         $asyncLoader = '';
         $custom_url = '';
@@ -81,7 +79,14 @@ class WebFontLoaderExtension extends SimpleExtension
                 $asyncLoader = $this->whichCDN($cdn);
 
             } else { // if false or nothing is entered use the current webfont loader version
-                $asyncLoader = $this->getBaseUrl() . 'assets/js/' . $this->_currentVersion . '/webfontloader.js';
+                $extPath = $app['resources']->getUrl('extensions');
+                $vendor = 'vendor/cdowdy/';
+                $extName = 'webfontloader/';
+
+
+                // non cdn webfont script
+                $asyncLoader = $extPath . $vendor . $extName . 'js/' . $this->_currentVersion . '/webfontloader.js';
+//                $asyncLoader = $this->getBaseUrl() . 'assets/js/' . $this->_currentVersion . '/webfontloader.js';
             }
         } else { // all else fails fall back to regular webfont loader script insertion
             $this->webfontScript();
@@ -214,7 +219,7 @@ WEBFONT;
 
     }
 
-    
+
     public function isSafe()
     {
         return true;
