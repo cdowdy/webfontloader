@@ -2,9 +2,16 @@
     "name": "cdowdy/webfontloader",
     "description": "A Bolt Extension To Use TypeKit's WebFont Loader in Your Templates.",
     "type": "bolt-extension",
-    "keywords": ["font loader", "Google Fonts", "TypeKit Font Loader"],
+    "keywords": [
+        "font loader",
+        "Google Fonts",
+        "TypeKit Font Loader"
+    ],
     "require": {
-        "bolt/bolt": ">=2.0.0,<3.0.0"
+        "bolt/bolt": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.7"
     },
     "license": "MIT",
     "authors": [
@@ -13,18 +20,26 @@
             "email": "cory@corydowdy.com"
         }
     ],
-    "minimum-stability" : "dev",
-	"prefer-stable" : true,
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
-        "files": [
-            "init.php"
-        ],
         "psr-4": {
-            "Bolt\\Extension\\cdowdy\\webfontloader\\": ""
+            "Bolt\\Extension\\cdowdy\\webfontloader\\": "src"
         }
     },
-    
+    "autoload-dev": {
+        "psr-4": {
+            "Bolt\\Extension\\cdowdy\\webfontloader\\Tests\\": "tests",
+            "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
+        }
+    },
     "extra": {
-        "bolt-assets": "assets"
+        "bolt-assets": "web",
+        "bolt-class": "Bolt\\Extension\\cdowdy\\webfontloader\\WebFontLoaderExtension",
+        "bolt-icon": "wf-icon.png",
+        "bolt-screenshots": [
+            "screenshots/screenshot1.png",
+            "screenshots/screenshot2.png"
+        ]
     }
 }
