@@ -213,26 +213,8 @@ WEBFONT;
         }
 
     }
+
     
-
-    /**
-     * @return array
-     */
-    protected function getDefaultConfig()
-    {
-        return [
-            'default' => [
-                'widths' => [ 320, 480, 768 ],
-                'heights' => [ 0 ],
-                'widthDensity' => 'w',
-                'sizes' => [ '100vw'  ],
-                'cropping' => 'resize',
-                'altText' => '',
-                'class' => ''
-            ]
-        ];
-    }
-
     public function isSafe()
     {
         return true;
